@@ -3,6 +3,7 @@ import numpy as np
 import pandas as pd
 import streamlit as st
 import cv2
+import zipfile
 
 """
 # Welcome to Streamlit!
@@ -53,6 +54,30 @@ if uploaded_files is not None:
         cv2.line(image_with_lines, (0, y), (width, y), (0, 255, 0), 2)
 
     st.image(image_with_lines,  caption='Precut Image')
+
+    cut_images = []
+    for row in range(images_vert):
+        for col in range(images_hor):
+            start_row = row * piece_height
+            end_row = (row + 1) * piece_height
+            start_col = col * piece_width
+            end_col = (col + 1) * piece_width
+
+            piece = binary_image[start_row:end_row, start_col:end_col]
+            cut_images.append(piece)
+    
+    zip_filename = 'cut_images.zip'
+    with zipfile.ZipFile(zip_filename, 'w') as zip_file:
+        for i, piece in enumerate(cut_images):
+            # Save each piece as a separate image
+            piece_filename = f'piece_{i + 1}.png'
+            cv2.imwrite(piece_filename, piece)
+
+            # Add the saved image to the zip file
+            zip_file.write(piece_filename)
+
+            # Remove the temporarily saved image file
+            os.remove(piece_filename)
 
 # num_points = st.slider("Number of points in spiral", 1, 10000, 1100)
 # num_turns = st.slider("Number of turns in spiral", 1, 300, 31)
