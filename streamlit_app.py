@@ -26,7 +26,9 @@ if uploaded_files is not None:
 
     Threshold = st.slider('Threshold', 0, 255, 127)
 
-    _, binary_image = cv2.threshold(opencv_image, Threshold, 255, cv2.THRESH_BINARY)
+    gray_image = cv2.cvtColor(opencv_image, cv2.COLOR_BGR2GRAY)
+
+    _, binary_image = cv2.threshold(gray_image, Threshold, 255, cv2.THRESH_BINARY)
 
     st.image(binary_image, caption='Binary Image')
 
