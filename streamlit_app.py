@@ -14,6 +14,8 @@ forums](https://discuss.streamlit.io).
 In the meantime, below is an example of what you can do with just a few lines of code:
 """
 
+st.button('click me')
+
 uploaded_file = st.file_uploader("Choose af file")
 
 if uploaded_file is not None:
