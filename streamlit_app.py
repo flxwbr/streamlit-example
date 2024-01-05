@@ -24,14 +24,35 @@ if uploaded_files is not None:
 
     st.image(opencv_image, caption='Image description')
 
-    Threshold = st.slider('Threshold', 0, 255, 127)
-
     gray_image = cv2.cvtColor(opencv_image, cv2.COLOR_BGR2GRAY)
+
+    st.image(gray_image, caption='Gray Image')
+
+    Threshold = st.slider('Threshold', 0, 255, 127)
 
     _, binary_image = cv2.threshold(gray_image, Threshold, 255, cv2.THRESH_BINARY)
 
     st.image(binary_image, caption='Binary Image')
 
+    height, width, _ = binary_image.shape
+
+    image_with_lines = binary_image.copy()
+
+    images_vert = st.slider('Threshold', 0, 200, 10)
+    images_hor = st.slider('Threshold', 0, 200, 10)
+
+    piece_height = height // images_vert
+    piece_width = width // images_hor    
+
+    for i in range(1, images_vert):
+        x = i * piece_width
+        cv2.line(image_with_lines, (x, 0), (x, height), (0, 255, 0), 2)
+
+    for j in range(1, images_hor):
+        y = j * piece_height
+        cv2.line(image_with_lines, (0, y), (width, y), (0, 255, 0), 2)
+
+    st.image(image_with_lines,  caption='Precut Image')
 
 # num_points = st.slider("Number of points in spiral", 1, 10000, 1100)
 # num_turns = st.slider("Number of turns in spiral", 1, 300, 31)
