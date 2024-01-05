@@ -16,12 +16,12 @@ In the meantime, below is an example of what you can do with just a few lines of
 
 st.button('click me')
 
-uploaded_file = st.file_uploader("Choose af file")
+uploaded_files = st.file_uploader("Choose af file", accept_multiple_files=True)
 
-if uploaded_file is not None:
-    file_bytes = np.asarray(bytearray(uploaded_file.read()), dtype=np.uint8)
+if uploaded_files is not None:
+    file_bytes = np.asarray(bytearray(uploaded_files[0].read()), dtype=np.uint8)
     opencv_image = cv2.imdecode(file_bytes, 1)
-    
+
     st.image(uploaded_file, caption='Image description')
 
 
