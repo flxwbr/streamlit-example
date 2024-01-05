@@ -34,7 +34,7 @@ if uploaded_files is not None:
 
     st.image(binary_image, caption='Binary Image')
 
-    height, width, _ = binary_image.shape
+    height, width = binary_image.shape
 
     image_with_lines = binary_image.copy()
 
