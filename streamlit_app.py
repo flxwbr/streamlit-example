@@ -70,7 +70,9 @@ if uploaded_files is not None:
     with zipfile.ZipFile(zip_filename, 'w') as zip_file:
         for i, piece in enumerate(cut_images):
             # Save each piece as a separate image
+            
             piece_filename = f'piece_{i + 1}.png'
+            st.write(piece_filename)
             cv2.imwrite(piece_filename, piece)
 
             # Add the saved image to the zip file
