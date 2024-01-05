@@ -19,7 +19,9 @@ st.button('click me')
 uploaded_file = st.file_uploader("Choose af file")
 
 if uploaded_file is not None:
-    original_image = cv2.imread(uploaded_file)
+    file_bytes = np.asarray(bytearray(uploaded_file.read()), dtype=np.uint8)
+    opencv_image = cv2.imdecode(file_bytes, 1)
+    
     st.image(uploaded_file, caption='Image description')
 
 
