@@ -24,6 +24,12 @@ if uploaded_files is not None:
 
     st.image(opencv_image, caption='Image description')
 
+    Threshold = st.slider('Threshold', 0, 255, 127)
+
+    _, binary_image = cv2.threshold(opencv_image, Threshold, 255, cv2.THRESH_BINARY)
+
+    st.image(binary_image, caption='Binary Image')
+
 
 # num_points = st.slider("Number of points in spiral", 1, 10000, 1100)
 # num_turns = st.slider("Number of turns in spiral", 1, 300, 31)
