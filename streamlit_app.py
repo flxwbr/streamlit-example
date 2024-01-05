@@ -38,8 +38,8 @@ if uploaded_files is not None:
 
     image_with_lines = binary_image.copy()
 
-    images_vert = st.slider('Threshold', 0, 200, 10)
-    images_hor = st.slider('Threshold', 0, 200, 10)
+    images_vert = st.slider('Threshold', 0, 200, 10, key='vert')
+    images_hor = st.slider('Threshold', 0, 200, 10, key='hor')
 
     piece_height = height // images_vert
     piece_width = width // images_hor    
