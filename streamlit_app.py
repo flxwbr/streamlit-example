@@ -22,7 +22,7 @@ if uploaded_files is not None:
     file_bytes = np.asarray(bytearray(uploaded_files[0].read()), dtype=np.uint8)
     opencv_image = cv2.imdecode(file_bytes, 1)
 
-    st.image(uploaded_file, caption='Image description')
+    st.image(opencv_image, caption='Image description')
 
 
 # num_points = st.slider("Number of points in spiral", 1, 10000, 1100)
